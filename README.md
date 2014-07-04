@@ -1,9 +1,12 @@
-# hu [![Build Status](https://secure.travis-ci.org/h2non/promitto.png?branch=master)][travis] [![NPM version](https://badge.fury.io/js/promitto.png)][npm]
+# promitto [![Build Status](https://secure.travis-ci.org/h2non/promitto.png?branch=master)][travis] [![NPM version](https://badge.fury.io/js/promitto.png)][npm]
 
 **promitto** is a tiny and funny **promises and deferred library for JavaScript environments**
 
 It's compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
 and it provides useful features for dealing with asynchronous promise-based patterns
+
+promitto is written in [Wisp][wisp], a Clojure-like language that transpiles into plain JavaScript. 
+It exploits functional programming style using common patterns such as lambda lifting, pure and higher-order functions, functional composition and more
 
 ## Installation
 
@@ -39,21 +42,40 @@ It works properly in any ES5 compliant engine
 ### Usage
 
 ```js
-var { log, filter, even, inc } = require('hu')
+var p = require('promitto')
 
-log(map(filter({a: 1, b: 2}, even), inc))
-// → { b: 3 }
+function doJob() {
+  var defer = p.defer()
+
+  asyncJob(function (err, data) {
+    if (err) {
+      defer.reject(err)      
+    } else {
+      defer.resolve(data)
+    }
+  })
+
+  return defer.promise
+}
 ```
 
-Or with the funny LiveScript
-```livescript
-(a: 1, b: 2)
-  |> filter _, even
-  |> map _, inc
-  |> log
-```
+## API
 
-### API
+#### Promitto(callback)
+
+#### Promitto.defer()
+
+#### Promitto.Promise(callback)
+
+#### Promitto.when(promise)
+
+#### Promitto.reject(reason)
+
+#### Promitto.resolve(reason)
+
+#### Promitto.all([promises])
+
+#### Promitto.isPromise(obj)
 
 ## Contributing
 
