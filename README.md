@@ -6,7 +6,7 @@ It's compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promi
 and it provides useful features for dealing with asynchronous promise-based patterns
 
 promitto is written in [Wisp][wisp], a Clojure-like language that transpiles into plain JavaScript. 
-It exploits functional programming style using common patterns such as lambda lifting, pure and higher-order functions, functional composition and more
+It exploits functional programming style using common patterns such as lambda lifting, pure functions, higher-order functions, functional composition and more
 
 ## Installation
 
