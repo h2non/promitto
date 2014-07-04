@@ -28,7 +28,7 @@ Or loading the script remotely (just for testing or development)
 <script src="//rawgithub.com/h2non/promitto/master/promitto.js"></script>
 ```
 
-## Environments
+### Environments
 
 It works properly in any ES5 compliant engine
 
@@ -39,7 +39,7 @@ It works properly in any ES5 compliant engine
 - Opera >= 12
 - IE >= 9
 
-### Usage
+## Usage
 
 ```js
 var p = require('promitto')
