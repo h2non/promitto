@@ -41,41 +41,90 @@ It works properly in any ES5 compliant engine
 
 ## Usage
 
+Using the deferred pattern
 ```js
 var p = require('promitto')
 
-function doJob() {
+function doAsyncJob() {
   var defer = p.defer()
-
-  asyncJob(function (err, data) {
-    if (err) {
-      defer.reject(err)      
-    } else {
-      defer.resolve(data)
-    }
+  get('http://www.google.com', function (err, res) {
+    if (err) defer.reject(err)
+    else defer.resolve(res)
   })
-
   return defer.promise
 }
+
+doAsyncJob().then(function (data) {
+  console.log(data)
+}).throw(function (reason) {
+  console.error('Error:', reason)
+})
+```
+
+Using the Promise pattern (Promise/A+ / ES6)
+```js
+var Promise = require('promitto').Promise
+
+var promise = Promise(function doJob(resolve, reject, notify) {
+  get('http://www.google.com', function (err, res) {
+    if (err) reject(err)
+    else resolve(res)
+  })
+})
+
+promise.then(function (data) {
+  console.log(data)
+}).throw(function (reason) {
+  console.error('Error:', reason)
+})
 ```
 
 ## API
 
-#### Promitto(callback)
+```
+var promitto = require('promitto')
+```
 
-#### Promitto.defer()
+#### promitto(callback)
 
-#### Promitto.Promise(callback)
+Create a new promitto promise passing the task function
 
-#### Promitto.when(promise)
+```js
+promitto(function readPackage(resolve, reject, notify) {
+  fs.readFile('./package.json', function (err, data) {
+    if (err) reject(err)
+    else resolve(JSON.parse(data))
+  })
+}).then(function (pkg) {
+  console.log('Name:', pkg.name)
+}).throw(function (reason) {
+  console.error('Error:', reason)
+})
+```
 
-#### Promitto.reject(reason)
+#### promitto.defer()
 
-#### Promitto.resolve(reason)
+#### promitto.Promise(callback)
 
-#### Promitto.all([promises])
+#### promitto.when(promise)
 
-#### Promitto.isPromise(obj)
+#### promitto.reject(reason)
+
+#### promitto.resolve(reason)
+
+#### promitto.all([promises])
+
+#### promitto.isPromise(obj)
+
+### Promise
+
+#### then(onResolve, onReject, onNotify)
+
+#### throw(callback)
+
+#### finally(callback)
+
+#### notify(callback)
 
 ## Contributing
 
