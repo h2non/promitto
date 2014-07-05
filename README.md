@@ -87,7 +87,7 @@ promise.then(function (data) {
 
 #### promitto(callback)
 
-Create a new promitto promise passing the task function
+Create a new promitto promise passing a function task
 
 ```js
 promitto(function readPackage(resolve, reject, notify) {
