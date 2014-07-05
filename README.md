@@ -3,7 +3,7 @@
 **promitto** is a tiny **Promise/Deferred library for JavaScript environments** which helps you when dealing with async tasks from a pretty and clean way. It provides an elegant, standard and simple [API](#api)
 
 It's compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
-and it provides useful features for asynchronous promise-based programming patterns
+and provides useful features for asynchronous promise-based programming patterns
 
 promitto is written in [Wisp][wisp], a Clojure-like language which transpiles into plain JavaScript.
 It exploits functional programming common patterns such as lambda lifting, pure functions, higher-order functions, functional composition and more
