@@ -1,6 +1,6 @@
 # promitto [![Build Status](https://secure.travis-ci.org/h2non/promitto.png?branch=master)][travis] [![NPM version](https://badge.fury.io/js/promitto.png)][npm]
 
-**promitto** is a tiny, funny and promissing **promises/deferred library for JavaScript environments** which provides an elegant and simple [API](#api)
+**promitto** is a tiny and funny **Promise/Deferred library for JavaScript environments** which provides an elegant, standard simple [API](#api)
 
 It's compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
 and it provides useful features for asynchronous promise-based pattern programming
@@ -106,7 +106,9 @@ promitto(function readPackage(resolve, reject, notify) {
 
 Creates a Deferred object
 
-#### promitto.Promise(callback)
+#### promitto.Promise(task)
+
+Creates a new [Promise](#promise) compatible with the ES6 promise interface
 
 #### promitto.when(value)
 
@@ -128,9 +130,9 @@ Combines multiple promises into a single promise that is resolved when all of th
 
 Returns a single promise that will be resolved with an array/hash of values, each value corresponding to the promise at the same index/key in the promises array/hash
 
-#### promitto.isPromise(obj)
+#### promitto.isPromise(value)
 
-Return if a given object is a promise
+Return if a given value is a compatible promise
 
 ### Promise
 
