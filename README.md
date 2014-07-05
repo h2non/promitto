@@ -41,6 +41,10 @@ It works properly in any ES5 compliant engine
 
 ## Basic usage
 
+```js
+var promitto = require('promitto')
+```
+
 Using [Deferred](#promittodefer) pattern
 ```js
 var p = require('promitto')
@@ -80,10 +84,6 @@ promise.then(function (data) {
 ```
 
 ## API
-
-```
-var promitto = require('promitto')
-```
 
 #### promitto(callback)
 
