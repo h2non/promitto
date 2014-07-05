@@ -33,8 +33,8 @@ define replace
 		  return line.length \
 		}) \
 		.join(os. EOL) \
-    .replace(/(var _ns_ = \{\n((.*)\n(.*)\n\s+\}\;(\n)?))+/g, '') \
-    .replace(/(\{(\s+)?\n(\s+)?\}\n)/g, ''); \
+		.replace(/(var _ns_ = \{\n((.*)\n(.*)\n\s+\}\;(\n)?))+/g, '') \
+		.replace(/(\{(\s+)?\n(\s+)?\}\n)/g, ''); \
 		fs.writeFileSync('./promitto.js', str)"
 endef
 
