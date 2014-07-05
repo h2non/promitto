@@ -3,10 +3,10 @@
 **promitto** is a tiny and funny **Promise/Deferred library for JavaScript environments** which provides an elegant, standard simple [API](#api)
 
 It's compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
-and it provides useful features for asynchronous promise-based pattern programming
+and it provides useful features for asynchronous promise-based programming patterns
 
-promitto is written in [Wisp][wisp], a Clojure-like language that transpiles into plain JavaScript.
-It exploits functional programming style using common patterns such as lambda lifting, pure functions, higher-order functions, functional composition and more
+promitto is written in [Wisp][wisp], a Clojure-like language which transpiles into plain JavaScript.
+It exploits functional programming common patterns such as lambda lifting, pure functions, higher-order functions, functional composition and more
 
 ## Installation
 
@@ -138,11 +138,24 @@ Return if a given value is a compatible promise
 
 #### then(onResolve, onReject, onNotify)
 
+Regardless of when the promise was or will be resolved or rejected, then calls one of the success or error callbacks asynchronously as soon as the result is available.
+
+The callbacks are called with a single argument: the result or rejection reason. Additionally, the notify callback may be called zero or more times to provide a progress indication, before the promise is resolved or rejected
+
 #### throw(callback)
+
+Catch promise resolve as reject status.
+Shorthand for `promise.then(null, onReject)`
 
 #### finally(callback)
 
+Allows you to observe either the fulfillment or rejection of a promise, but to do so without modifying the final value.
+This is useful to release resources or do some clean-up that needs to be done whether the promise was rejected or resolved
+
 #### notify(callback)
+
+Handle the promise progress while it's still on pending state.
+This is useful when you want to report the state of the process until it's finally fulfilled (resolved or rejected)
 
 ## Contributing
 
