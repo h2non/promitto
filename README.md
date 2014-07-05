@@ -41,7 +41,7 @@ It works properly in any ES5 compliant engine
 
 ## Basic usage
 
-Using the deferred pattern
+Using [Deferred](#promittodefer) pattern
 ```js
 var p = require('promitto')
 
@@ -61,7 +61,7 @@ doAsyncJob().then(function (data) {
 })
 ```
 
-Using the Promise pattern (Promise/A+ / ES6)
+Using the [Promise](#promittopromisetask) pattern (Promise/A+ / ES6 compatible)
 ```js
 var Promise = require('promitto').Promise
 
