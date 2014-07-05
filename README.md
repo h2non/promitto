@@ -1,11 +1,11 @@
 # promitto [![Build Status](https://secure.travis-ci.org/h2non/promitto.png?branch=master)][travis] [![NPM version](https://badge.fury.io/js/promitto.png)][npm]
 
-**promitto** is a tiny and funny **promises and deferred library for JavaScript environments**
+**promitto** is a tiny, funny and promissing **promises/deferred library for JavaScript environments** which provides an elegant and simple [API](#api)
 
 It's compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
-and it provides useful features for dealing with asynchronous promise-based patterns
+and it provides useful features for asynchronous promise-based pattern programming
 
-promitto is written in [Wisp][wisp], a Clojure-like language that transpiles into plain JavaScript. 
+promitto is written in [Wisp][wisp], a Clojure-like language that transpiles into plain JavaScript.
 It exploits functional programming style using common patterns such as lambda lifting, pure functions, higher-order functions, functional composition and more
 
 ## Installation
@@ -39,7 +39,7 @@ It works properly in any ES5 compliant engine
 - Opera >= 12
 - IE >= 9
 
-## Usage
+## Basic usage
 
 Using the deferred pattern
 ```js
@@ -104,17 +104,33 @@ promitto(function readPackage(resolve, reject, notify) {
 
 #### promitto.defer()
 
+Creates a Deferred object
+
 #### promitto.Promise(callback)
 
-#### promitto.when(promise)
+#### promitto.when(value)
+
+Wrap an object that might be a value or a 3rd party promise
+
+This is useful when you are dealing with an object that might or might not be a promise, or if the promise comes from a source that can't be trusted
 
 #### promitto.reject(reason)
 
+Creates a promise that is resolved as rejected with the specified reason
+
 #### promitto.resolve(reason)
+
+Creates a promise that is resolved with the specified reason
 
 #### promitto.all([promises])
 
+Combines multiple promises into a single promise that is resolved when all of the input promises are resolved
+
+Returns a single promise that will be resolved with an array/hash of values, each value corresponding to the promise at the same index/key in the promises array/hash
+
 #### promitto.isPromise(obj)
+
+Return if a given object is a promise
 
 ### Promise
 
