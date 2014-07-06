@@ -13,11 +13,11 @@
 
 (defn ^:private finally-fn
   [push dispatch]
-  (fn [callback] 
+  (fn [callback]
     (push :finally callback)
     (dispatch :finally)))
 
-(defn ^:private throw-fn
+(defn ^:private catch-fn
   [push dispatch]
   (fn [callback]
     (push :reject callback)
@@ -40,7 +40,7 @@
     (.for-each (.keys Object ctx)
       (fn [name]
         (set! (aget Promise name)
-          (chain Promise 
+          (chain Promise
             (aget ctx name))))) Promise))
 
 (defn ^object promise
@@ -49,5 +49,5 @@
   (def ctx
     { :then (then-fn push dispatch)
       :finally (finally-fn push dispatch)
-      :throw (throw-fn push dispatch)
+      :catch (catch-fn push dispatch)
       :notify (notify-fn state push dispatch) }) (new-promise ctx))

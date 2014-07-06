@@ -60,7 +60,7 @@ function doAsyncJob() {
 
 doAsyncJob().then(function (data) {
   console.log(data)
-}).throw(function (reason) {
+}).catch(function (reason) {
   console.error('Error:', reason)
 })
 ```
@@ -78,7 +78,7 @@ var promise = Promise(function doJob(resolve, reject, notify) {
 
 promise.then(function (data) {
   console.log(data)
-}).throw(function (reason) {
+}).catch(function (reason) {
   console.error('Error:', reason)
 })
 ```
@@ -97,7 +97,7 @@ promitto(function readPackage(resolve, reject, notify) {
   })
 }).then(function (pkg) {
   console.log('Name:', pkg.name)
-}).throw(function (reason) {
+}).catch(function (reason) {
   console.error('Error:', reason)
 })
 ```
@@ -161,7 +161,7 @@ Regardless of when the promise was or will be resolved or rejected, then calls o
 
 The callbacks are called with a single argument: the result or rejection reason. Additionally, the notify callback may be called zero or more times to provide a progress indication, before the promise is resolved or rejected
 
-#### throw(callback)
+#### catch(callback)
 
 Catch promise resolve as reject status.
 Shorthand for `promise.then(null, onReject)`

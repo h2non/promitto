@@ -7,9 +7,9 @@
   [rejected]
   (Promise.
     (fn [resolve reject]
-      (set-timeout 
-        (fn [] 
-          (if rejected 
+      (set-timeout
+        (fn []
+          (if rejected
             (reject 2)
             (resolve 1))) 50))))
 
@@ -19,19 +19,19 @@
       (fn [done]
         (let [defer (new-promise)]
           (.then defer
-            (fn [result] 
+            (fn [result]
               (.to.be.equal (expect result) 1)))
           (.finally defer
-            (fn [result] 
+            (fn [result]
               (.to.be.equal (expect result) 1)
               (done))))))
     (it "should reject a promise"
       (fn [done]
         (let [defer (new-promise true)]
-          (.throw defer
-            (fn [reason] 
+          (.catch defer
+            (fn [reason]
               (.to.be.equal (expect reason) 2)))
           (.finally defer
-            (fn [reason] 
+            (fn [reason]
               (.to.be.equal (expect reason) 2)
               (done))))))))

@@ -9,10 +9,12 @@
   (let [defer (deferred)]
     (cond (not (fn? lamdba))
       (throw (TypeError. "first argument must be a function")))
-    (lamdba
-      (.-resolve defer)
-      (.-reject defer) 
-      (.-notify defer)) (.-promise defer)))
+    (try
+      (lamdba
+        (.-resolve defer)
+        (.-reject defer)
+        (.-notify defer))
+      (catch err (.reject defer err))) (.-promise defer)))
 
 (set! (.-Promise Promitto) Promitto)
 (set! (.-defer Promitto) deferred)

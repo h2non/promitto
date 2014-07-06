@@ -7,7 +7,7 @@
 (defn ^:private random []
   (.round Math (* (.random Math) 100)))
 
-(defn ^:private new-promise 
+(defn ^:private new-promise
   [reject]
   (let [defer (deferred)]
     (set-timeout
@@ -18,19 +18,19 @@
 
 (describe :all
   (fn []
-    (describe "resolve array of promises" 
+    (describe "resolve array of promises"
       (fn []
         (let [pool [(new-promise) (new-promise) (new-promise)]
               defer (all pool)]
-          (it "should resolve all the promises" 
+          (it "should resolve all the promises"
             (fn [done]
-              (.then defer 
+              (.then defer
                 (fn [results]
                   (.to.be.an (expect results) :array)
                   (.to.have.length (expect results) 3)
                   (.to.deep.equal (expect results) [1 1 1])
                   (done)))))
-          (it "should call finally state with proper data" 
+          (it "should call finally state with proper data"
             (fn [done]
               (.finally defer
                 (fn [results]
@@ -43,7 +43,7 @@
               defer (all pool)]
           (it "should reject the promises"
             (fn [done]
-              (.throw defer 
+              (.catch defer
                 (fn [reason]
                   (.to.be.an (expect reason) :number)
                   (.to.be.equal (expect reason) 1)
@@ -54,7 +54,7 @@
               defer (all pool)]
           (it "should resolve the promises"
             (fn [done]
-              (.then defer 
+              (.then defer
                 (fn [results]
                   (.to.be.an (expect results) :array)
                   (.to.have.length (expect results) 5)
