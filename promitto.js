@@ -203,7 +203,7 @@ var finallyFn = function finallyFn(push, dispatch) {
         return dispatch('finally');
     };
 };
-var throwFn = function throwFn(push, dispatch) {
+var catchFn = function catchFn(push, dispatch) {
     return function (callback) {
         push('reject', callback);
         return dispatch('reject');
@@ -234,7 +234,7 @@ var promise = exports.promise = function promise(state, push, dispatch) {
         var ctx = {
                 'then': thenFn(push, dispatch),
                 'finally': finallyFn(push, dispatch),
-                'throw': throwFn(push, dispatch),
+                'catch': catchFn(push, dispatch),
                 'notify': notifyFn(state, push, dispatch)
             };
         return newPromise(ctx);
@@ -258,7 +258,13 @@ var Promitto = function Promitto(lamdba) {
         !isFn(lamdba) ? (function () {
             throw new TypeError('first argument must be a function');
         })() : void 0;
-        lamdba(deferø1.resolve, deferø1.reject, deferø1.notify);
+        (function () {
+            try {
+                return lamdba(deferø1.resolve, deferø1.reject, deferø1.notify);
+            } catch (err) {
+                return deferø1.reject(err);
+            }
+        })();
         return deferø1.promise;
     }.call(this);
 };
