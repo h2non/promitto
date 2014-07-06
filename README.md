@@ -13,14 +13,14 @@ It exploits functional programming common patterns such as lambda lifting, pure 
 #### Node.js
 
 ```bash
-$ npm install promitto --save
+npm install promitto --save
 ```
 
 #### Browser
 
 Via Bower package manager
 ```bash
-$ bower install promitto --save
+bower install promitto --save
 ```
 
 Or loading the script remotely (just for testing or development)
