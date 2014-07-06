@@ -104,7 +104,7 @@ promitto(function readPackage(resolve, reject, notify) {
 
 #### promitto.defer()
 
-Creates a Deferred object
+Creates a [Deferred](#deferred) object
 
 #### promitto.Promise(task)
 
@@ -133,6 +133,25 @@ Returns a single promise that will be resolved with an array/hash of values, eac
 #### promitto.isPromise(value)
 
 Return if a given value is a compatible promise
+
+### Deferred
+
+#### resolve(value)
+
+Resolves the derived promise with the `value`
+
+#### reject(reason)
+
+Rejects the derived promise with the `reason`.
+This is equivalent to resolving it with a rejection constructed via `promitto.reject`
+
+#### notify(reason)
+
+Provides updates on the status of the promise's execution. This may be called multiple times before the promise is either resolved or rejected
+
+#### promise
+
+Expose the [Promise](#promise) object associated with this deferred
 
 ### Promise
 
