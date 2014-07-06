@@ -65,7 +65,7 @@ doAsyncJob().then(function (data) {
 })
 ```
 
-Using the [Promise](#promittopromisetask) pattern (Promise/A+ / ES6 compatible)
+Using [Promise](#promittopromisetask) pattern (Promise/A+ / ES6 compatible)
 ```js
 var Promise = require('promitto').Promise
 
