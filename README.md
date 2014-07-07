@@ -178,7 +178,7 @@ This is useful when you want to report the state of the process until it's final
 
 ## Contributing
 
-Wanna help? Cool! It will be really apreciated :)
+Wanna help? Cool! It will be appreciated :)
 
 You must add new test cases for any new feature or refactor you do,
 always following the same design/code patterns that already exist
