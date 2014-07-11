@@ -1,6 +1,6 @@
 {
   "name": "promitto",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tiny promise library compatible with Promise/A+ and ES6",
   "license": "MIT",
   "author": "Tomas Aparicio",
