@@ -144,6 +144,12 @@ var notify = function notify(cacheArgs, dispatch) {
         return dispatch('notify');
     };
 };
+var chainDeferred = function chainDeferred(ctx) {
+    Object.keys(ctx).forEach(function (name) {
+        return (name === 'promise' ? false : true) ? ctx[name] = chain(ctx, ctx[name]) : void 0;
+    });
+    return ctx;
+};
 var deferred = exports.deferred = function deferred() {
         return function () {
             var bufø1 = newBuf();
@@ -156,12 +162,12 @@ var deferred = exports.deferred = function deferred() {
             var applyø1 = applyState(cacheArgsø1, switchStateø1, dispatchø1);
             var callStateø1 = callState(applyø1);
             var ctx = {
-                    'resolve': chain(ctx, callStateø1('resolve')),
-                    'reject': chain(ctx, callStateø1('reject')),
-                    'notify': chain(ctx, notify(cacheArgsø1, dispatchø1)),
+                    'resolve': callStateø1('resolve'),
+                    'reject': callStateø1('reject'),
+                    'notify': notify(cacheArgsø1, dispatchø1),
                     'promise': promise(stateø1, pusherø1, dispatchø1)
                 };
-            return ctx;
+            return chainDeferred(ctx);
         }.call(this);
     };
 var resolved = exports.resolved = function resolved(reason) {
