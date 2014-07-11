@@ -36,33 +36,33 @@
           (.-resolve buf))
         (aget buf type))))
 
+(defn ^:private flush
+  [pool]
+  (fn [name]
+    (.splice (aget pool name) 0)))
+
 (defn ^:private dispatcher
-  [state buf]
-  (let [get-args (buf-args state buf)]
+  [state pool buf]
+  (let [flush (flush pool)
+        get-args (buf-args state buf)]
     (fn [type]
-      (fn [fn]
-        (cond (fn? fn)
-          (let [args (get-args type fn)]
-            (apply fn args)))))))
+      (.for-each (aget pool type)
+        (fn [lamdba]
+          (let [args (get-args type lamdba)]
+            (apply lamdba args))))
+      (cond (!? type :notify)
+        (flush type)))))
 
 (defn ^:private dispatch
   [state pool buf]
-  (let [dispatcher (dispatcher state buf)]
+  (let [dispatcher (dispatcher state pool buf)]
     (fn [type]
       (next-tick
         (fn []
           (cond (or (aget state type) (? type :notify))
-            (do
-              (.for-each (aget pool type)
-                (dispatcher type))
-              (cond (not (? type :notify))
-                (.splice (aget pool type) 0))))
-          (cond (and
-                  (not (.-pending state))
-                  (.-length (aget pool :finally)))
-            (do
-              (.for-each (.-finally pool) (dispatcher :finally))
-              (.splice (.-finally pool) 0))))))))
+            (dispatcher type))
+          (cond (not (.-pending state))
+            (dispatcher :finally)))))))
 
 (defn ^:private apply-state
   [cache-args switch-state dispatch]
@@ -87,9 +87,10 @@
   [ctx]
   (.for-each (.keys Object ctx)
     (fn [name]
-      (cond (!? name "promise")
-        (set! (aget ctx name)
-          (chain ctx (aget ctx name)))))) ctx)
+      (let [member (aget ctx name)]
+        (cond (!? name :promise)
+          (set! (aget ctx name)
+            (chain ctx member)))))) ctx)
 
 (defn ^object deferred
   "Create a new deferred object"

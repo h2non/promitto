@@ -90,36 +90,33 @@ var bufArgs = function bufArgs(state, buf) {
         return type === 'finally' ? state.reject ? buf.reject : buf.resolve : buf[type];
     };
 };
-var dispatcher = function dispatcher(state, buf) {
+var flush = function flush(pool) {
+    return function (name) {
+        return pool[name].splice(0);
+    };
+};
+var dispatcher = function dispatcher(state, pool, buf) {
     return function () {
+        var flushø1 = flush(pool);
         var getArgsø1 = bufArgs(state, buf);
         return function (type) {
-            return function (fn) {
-                return isFn(fn) ? function () {
-                    var argsø1 = getArgsø1(type, fn);
-                    return fn.apply(void 0, argsø1);
-                }.call(this) : void 0;
-            };
+            pool[type].forEach(function (lamdba) {
+                return function () {
+                    var argsø1 = getArgsø1(type, lamdba);
+                    return lamdba.apply(void 0, argsø1);
+                }.call(this);
+            });
+            return (type === 'notify' ? false : true) ? flushø1(type) : void 0;
         };
     }.call(this);
 };
 var dispatch = function dispatch(state, pool, buf) {
     return function () {
-        var dispatcherø1 = dispatcher(state, buf);
+        var dispatcherø1 = dispatcher(state, pool, buf);
         return function (type) {
             return nextTick(function () {
-                state[type] || type === 'notify' ? (function () {
-                    pool[type].forEach(dispatcherø1(type));
-                    return !(type === 'notify') ? pool[type].splice(0) : void 0;
-                })() : void 0;
-                return !state.pending && pool['finally'].length ? (function () {
-                    state[type] || type === 'notify' ? (function () {
-                        pool[type].forEach(dispatcherø1(type));
-                        return !(type === 'notify') ? pool[type].splice(0) : void 0;
-                    })() : void 0;
-                    pool.finally.forEach(dispatcherø1('finally'));
-                    return pool.finally.splice(0);
-                })() : void 0;
+                state[type] || type === 'notify' ? dispatcherø1(type) : void 0;
+                return !state.pending ? dispatcherø1('finally') : void 0;
             });
         };
     }.call(this);
@@ -146,7 +143,10 @@ var notify = function notify(cacheArgs, dispatch) {
 };
 var chainDeferred = function chainDeferred(ctx) {
     Object.keys(ctx).forEach(function (name) {
-        return (name === 'promise' ? false : true) ? ctx[name] = chain(ctx, ctx[name]) : void 0;
+        return function () {
+            var memberø1 = ctx[name];
+            return (name === 'promise' ? false : true) ? ctx[name] = chain(ctx, memberø1) : void 0;
+        }.call(this);
     });
     return ctx;
 };
