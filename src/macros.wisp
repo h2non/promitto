@@ -4,7 +4,7 @@
   [x y]
   `(identical? ~x ~y))
 
-(defmacro not?
+(defmacro !?
   [x y]
   `(if (? ~x ~y) false true))
 

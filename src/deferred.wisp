@@ -13,11 +13,11 @@
 (defn ^:private switch-state
   [state]
   (fn [type]
-    (cond 
+    (cond
       (and (not (? type :notify)) (.-pending state))
       (do
         (set! (.-pending state) false)
-        (cond (? type :resolve) 
+        (cond (? type :resolve)
           (set! (.-resolve state) true))
         (cond (? type :reject)
           (set! (.-reject state) true))))))
@@ -49,11 +49,11 @@
   [state pool buf]
   (let [dispatcher (dispatcher state buf)]
     (fn [type]
-      (next-tick 
+      (next-tick
         (fn []
           (cond (or (aget state type) (? type :notify))
             (do
-              (.for-each (aget pool type) 
+              (.for-each (aget pool type)
                 (dispatcher type))
               (cond (not (? type :notify))
                 (.splice (aget pool type) 0))))
@@ -83,6 +83,14 @@
     (cache-args :notify arguments)
     (dispatch :notify)))
 
+(defn ^:private chain-deferred
+  [ctx]
+  (.for-each (.keys Object ctx)
+    (fn [name]
+      (cond (!? name "promise")
+        (set! (aget ctx name)
+          (chain ctx (aget ctx name)))))) ctx)
+
 (defn ^object deferred
   "Create a new deferred object"
   []
@@ -95,14 +103,11 @@
         dispatch (dispatch state pool buf)
         apply (apply-state cache-args switch-state dispatch)
         call-state (call-state apply)]
-    (def ctx 
-      { :resolve (chain ctx 
-          (call-state :resolve))
-        :reject (chain ctx 
-          (call-state :reject))
-        :notify (chain ctx 
-          (notify cache-args dispatch))
-        :promise (promise state pusher dispatch) }) ctx))
+    (def ctx
+      { :resolve (call-state :resolve)
+        :reject (call-state :reject)
+        :notify (notify cache-args dispatch)
+        :promise (promise state pusher dispatch) }) (chain-deferred ctx)))
 
 (defn ^promise resolved
   "Returns a promise with resolve status with a custom reason"
