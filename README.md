@@ -1,7 +1,7 @@
 # promitto [![Build Status](https://secure.travis-ci.org/h2non/promitto.png?branch=master)][travis] [![NPM version](https://badge.fury.io/js/promitto.png)][npm]
 
 **promitto** is a tiny **Promise/Deferred library for JavaScript environments** which helps you 
-when dealing with asynchronous patterns programming in a pretty and clean way. 
+when dealing with asynchronous patterns programming in a pretty and clean way
 
 It provides an elegant and simple [API](#api) compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
 
@@ -108,7 +108,7 @@ Creates a [Deferred](#deferred) object
 
 #### promitto.Promise(task)
 
-Creates a new [Promise](#promise) compatible with the ES6 promise interface
+Creates a new [Promise](#promise-1) compatible with the ES6 promise interface
 
 #### promitto.when(value)
 
