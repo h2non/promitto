@@ -23,7 +23,7 @@ Via Bower package manager
 bower install promitto --save
 ```
 
-Or loading the script remotely (just for testing or development)
+Or loading the script remotely
 ```html
 <script src="//cdn.rawgit.com/h2non/promitto/0.1.2/promitto.js"></script>
 ```
