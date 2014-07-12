@@ -151,7 +151,7 @@ Provides updates on the status of the promise's execution. This may be called mu
 
 #### promise
 
-Expose the [Promise](#promise) object associated with this deferred
+Expose the [Promise](#promise-1) object associated with this deferred
 
 ### Promise
 
