@@ -25,7 +25,7 @@ bower install promitto --save
 
 Or loading the script remotely (just for testing or development)
 ```html
-<script src="//rawgithub.com/h2non/promitto/master/promitto.js"></script>
+<script src="//cdn.rawgit.com/h2non/promitto/0.1.2/promitto.js"></script>
 ```
 
 ### Environments
