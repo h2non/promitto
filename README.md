@@ -1,11 +1,11 @@
 # promitto [![Build Status](https://secure.travis-ci.org/h2non/promitto.png?branch=master)][travis] [![NPM version](https://badge.fury.io/js/promitto.png)][npm]
 
-**promitto** is a tiny **Promise/Deferred library for JavaScript environments** which helps you 
-when dealing with asynchronous patterns programming in a pretty and clean way
+**promitto** is a tiny **Promise/Deferred library for JavaScript environments** which helps you
+when dealing with asynchronous programming patterns in an elegant and clean way
 
-It provides an elegant and simple [API](#api) compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
+It provides a simple [API](#api) which is fully compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
 
-promitto is written in [Wisp][wisp], a Clojure-like language which transpiles into plain JavaScript.
+It's written in [Wisp][wisp], a Clojure-like language which transpiles into plain JavaScript.
 It exploits functional programming common patterns such as lambda lifting, pure functions, higher-order functions, function composition and more
 
 ## Installation
@@ -18,9 +18,14 @@ npm install promitto --save
 
 #### Browser
 
-Via Bower package manager
+Via [Bower](http://bower.io)
 ```bash
-bower install promitto --save
+bower install promitto
+```
+
+Via [Component](http://component.io)
+```bash
+bower install h2non/promitto
 ```
 
 Or loading the script remotely
