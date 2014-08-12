@@ -25,7 +25,7 @@ bower install promitto
 
 Via [Component](http://component.io)
 ```bash
-bower install h2non/promitto
+component install h2non/promitto
 ```
 
 Or loading the script remotely
