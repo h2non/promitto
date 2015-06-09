@@ -1,12 +1,12 @@
 # promitto [![Build Status](https://secure.travis-ci.org/h2non/promitto.png?branch=master)][travis] [![NPM version](https://badge.fury.io/js/promitto.png)][npm]
 
-**promitto** is a tiny **Promise/Deferred library for JavaScript environments** which helps you
-when dealing with asynchronous programming patterns in an elegant and clean way
+**promitto** is a small and dependency-free **Promise/Deferred library for JavaScript environments** which helps you
+when dealing with asynchronous programming patterns in an elegant, consistent and clean way.
 
-It provides a simple [API](#api) which is fully compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
+It provides a simple [API](#api) compatible with the [Promise/A+ spec](http://promises-aplus.github.io/promises-spec/)
 
-It's written in [Wisp][wisp], a Clojure-like language which transpiles into plain JavaScript.
-It exploits functional programming common patterns such as lambda lifting, pure functions, higher-order functions, function composition and more
+It's written in [Wisp][wisp], a Clojure like language which transpiles into plain JavaScript.
+It exploits some functional programming patterns such as lambda lifting, pure functions, higher-order functions, function composition, among others...
 
 ## Installation
 
@@ -219,11 +219,6 @@ $ make test
 Browser sources bundle generation
 ```
 $ make browser
-```
-
-Release a new version
-```
-$ make release
 ```
 
 ## License
