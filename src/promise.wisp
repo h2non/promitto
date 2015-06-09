@@ -1,4 +1,4 @@
-(ns promitto.lib.
+(ns promitto.lib.promise
   (:require
     [promitto.lib.utils :refer [chain]]
     [promitto.lib.types :refer [states]]))
